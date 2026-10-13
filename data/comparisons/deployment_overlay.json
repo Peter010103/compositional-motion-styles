@@ -1,0 +1,52 @@
+{
+  "source_sha256": "594a3972c42cb69b9200045149a690037da345785c40508ccc2dcc3d345760bd",
+  "log_sha256": "03bad67dc7e5eb1113a5eed33409d696df4a07b0b5e9fa1f7fb8ea730ab7ee24",
+  "source_interval_s": [
+    3.2,
+    15.2
+  ],
+  "csv_video_time_offset_s": 1.980503,
+  "forward_command_mps": 0.5,
+  "verified_log_samples": 601,
+  "style_intervals": [
+    {
+      "style": "C04",
+      "reference_id": 86,
+      "start_s": 0.0,
+      "end_s": 3.1994659999999993
+    },
+    {
+      "style": "C00",
+      "reference_id": 5,
+      "start_s": 3.1994659999999993,
+      "end_s": 6.199770999999999
+    },
+    {
+      "style": "C14",
+      "reference_id": 321,
+      "start_s": 6.199770999999999,
+      "end_s": 9.199698999999995
+    },
+    {
+      "style": "C11",
+      "reference_id": 259,
+      "start_s": 9.199698999999995,
+      "end_s": 12.0
+    }
+  ],
+  "switch_cue_duration_s": 1.2,
+  "output": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "duration_s": 12.0
+  },
+  "framing": "Full clean 3840x2160 camera frame downsampled to 1280x720. No digital cropping, zoom, pan, stabilization, retiming, or cuts within the excerpt.",
+  "velocity_trace": {
+    "source_column": "measured_vx_1hz",
+    "filter": "Butterworth order 4, 5 Hz, zero phase",
+    "display": "Onboard estimated forward velocity with a constant-command line; past three seconds on a fixed -0.25\u20131.25 m/s axis."
+  },
+  "reference_playback": "Exact logged references, looping with phase measured from the original logged selection. Not frame-aligned trajectory tracking.",
+  "note": "One overlay rebuilt from clean footage. Style-switch cues mark logged selections, not instantaneous physical response. Operator heading corrections remain present. Dense original multi-axis/contact telemetry is omitted from this opening clip."
+}

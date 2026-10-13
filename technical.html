@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technical details · CODES</title>
+  <link rel="stylesheet" href="site.css">
+  <script src="data/gallery.min.js"></script>
+  <script src="data/comparisons.min.js"></script>
+  <script src="motion-ui.js" defer></script>
+  <script src="comparisons.js" defer></script>
+</head>
+<body data-page="technical">
+  <a class="skip-link" href="#method">Skip to content</a>
+  <header class="technical-header content-section">
+    <a href="index.html">← Back to the interactive demonstrations</a>
+    <h1>Technical details and full results</h1>
+    <p>CODES · University of Cambridge · Supplementary material</p>
+    <nav class="technical-nav" aria-label="Technical sections"><a href="#method">Method</a><a href="#references">Recordings</a><a href="#coherence">Coherence</a><a href="#velocity">Velocity explorer</a><a href="#command">Command tracking</a><a href="#matched">Matched comparisons</a><a href="#deployment">Deployment</a></nav>
+  </header>
+  <main class="technical-main">
+    <section id="method" class="content-section">
+      <h2>Method and data</h2>
+      <p>The collection combines Kine2Go policy executions based on animal and robot motions with motion-capture recordings of teleoperated Go2 motions. Ten independently trained temporal encoders learn from reconstruction, instance contrast, and weak coarse-label guidance. Their cosine geometries are averaged before HDBSCAN identifies 16 candidate styles without a prescribed count.</p>
+      <p>A reinforcement-learning policy combines a selected reference code with forward, lateral, and yaw-rate commands. The supported command range depends on the style. All decomposition methods use the same 53 recordings and 10,661 two-second windows, with no decomposition train/test split.</p>
+    </section>
+    <section id="references" class="content-section">
+      <h2>Recorded examples</h2>
+      <p>The same rule is used for every method: select up to three distinct two-second reference windows, prioritizing different recordings before additional non-overlapping windows from the same recording. Selection does not use controller performance. VQ-VAE code 8 has only one available window, so its remaining slots are empty.</p>
+      <p>These clips show recorded motions, not policy executions. Group numbers do not correspond between methods. All videos use the same camera and 720p / 30 fps rendering. Navigation thumbnails use the frame at 0.5 seconds.</p>
+      <h3>Free-form reference comparison</h3>
+      <p>Choose any two methods, groups, and examples. This browser does not imply that the selected groups correspond.</p>
+      <div id="reference-compare-root" class="media-comparison-grid">
+        <div class="compare-card"><h4 id="compare-left-heading">Left reference</h4><label for="compare-left-model">Method</label><select id="compare-left-model"></select><label for="compare-left-group">Group or code</label><select id="compare-left-group"></select><label for="compare-left-sample">Example</label><select id="compare-left-sample"></select><video id="compare-left-video" controls muted loop playsinline preload="metadata"></video><p id="compare-left-source" class="source-caption"></p></div>
+        <div class="compare-card"><h4 id="compare-right-heading">Right reference</h4><label for="compare-right-model">Method</label><select id="compare-right-model"></select><label for="compare-right-group">Group or code</label><select id="compare-right-group"></select><label for="compare-right-sample">Example</label><select id="compare-right-sample"></select><video id="compare-right-video" controls muted loop playsinline preload="metadata"></video><p id="compare-right-source" class="source-caption"></p></div>
+      </div>
+      <div class="comparison-buttons"><button id="reference-play" type="button">Play both</button><button id="reference-pause" type="button" class="secondary-button">Pause</button></div>
+      <p id="reference-playback-status" class="playback-status" aria-live="polite"></p>
+      <p class="small-note">Playback starts together without aligning the motion phase. Examples within one VQ code supply the same code to its controller.</p>
+    </section>
+    <section id="coherence" class="content-section comparison-section">
+      <h2>Coherence and decomposition ablations</h2>
+      <div id="coherence-comparison-table" class="comparison-table-wrap"></div>
+      <p>Silhouette measures within-group cohesion relative to between-group separation. Cross-recording AUC measures whether same-group windows from different recordings are mechanically closer than different-group windows; chance is 0.5. Both use the same label-independent, phase-insensitive 32-dimensional kinematic PCA representation, not each method's learned space. These are kinematic diagnostics, not semantic ground truth.</p>
+      <p>CODES uses weak coarse-label guidance and ten encoders. “Without coarse labels” is the paper's “No coarse terms” ablation: it keeps the ensemble but removes label guidance. VQ-VAE is a label-free, protocol-matched offline baseline, not a reproduction of a complete published VQ-based controller. The comparison does not isolate clustering versus vector quantization.</p>
+      <p>Full-coverage CODES propagates assignments without retraining. Recording-balanced VQ-VAE is a decomposition control; Kinematic PCA and TS2Vec have decomposition results only.</p>
+      <div id="decomposition-comparison-table" class="comparison-table-wrap"></div>
+      <p>Effective K discounts sparsely occupied groups through the exponential of occupancy entropy. Locomotion K counts groups predominantly associated with that diagnostic coarse label. Coverage is the fraction not rejected as density noise. Core switching excludes transitions through rejected regions and can be low when a representation collapses.</p>
+      <p>Shading identifies CODES, not a universal winner. Seven groups remain with uniform attraction; removing reconstruction leaves three. CODES' lower coverage reflects more selective density support.</p>
+      <div class="download-links"><a href="data/comparisons/decomposition.csv" download>Decomposition CSV</a><a href="data/comparisons/coherence.csv" download>Coherence CSV</a></div>
+    </section>
+    <section id="velocity" class="content-section">
+      <h2>Velocity explorer protocol</h2>
+      <p>All 16 CODES styles are tested at 135 forward/lateral velocity pairs, with zero yaw-rate command and three trials per cell. Command fidelity is the fraction completing the trial with planar RMSE ≤ 0.30 m/s and yaw-rate RMSE ≤ 0.40 rad/s. The yellow outline marks recorded velocity support, not a training holdout.</p>
+      <p>Style fidelity is reference-consensus cosine, averaged over available scored windows and trials. Larger values indicate more similar encoded motion; this is not a perceptual rating or a style pass/fail threshold. Colors match the paper's asinh scale (width 0.12), spanning −0.1 to 1.0; lower values use the lower-end color, while the displayed numbers are unchanged. Gray cells have no scored windows. The two grid modes assess different properties.</p>
+      <p>The default reference is the fixed controller-conditioning window used throughout that style's sweep. The optional velocity-matched display instead selects a recorded two-second window from the same style whose mean forward and lateral velocity is closest to the cell, using the original grid-scaled distance and the zero-yaw slice. This display choice does not change the policy rollout or the score. Style 5 has no recorded example in that slice, so this option falls back to the actual controller reference.</p>
+      <p>The video always shows repeat 0 (labeled trial 1 on the website), not the best-performing trial. Policy clips replay seconds 5–15 of saved Isaac Sim trials; MuJoCo supplies the kinematic rendering, not a new dynamics simulation. Early terminations are labeled and the last alive state is held. The two-second reference repeats without phase alignment. Reference-consensus cosine is always computed against the controller-conditioning reference, regardless of the video displayed.</p>
+      <p>The explorer uses the 20,000-update CODES controller, before deployment fine-tuning. Grid statistics summarize all three trials; clip metrics describe only the displayed trial. Reference selection and hover/click controls do not run a live policy.</p>
+      <div class="download-links"><a href="data/velocity_explorer.json" download>Grid data</a><a href="data/velocity_explorer_sources.json" download>Sources and protocol</a></div>
+    </section>
+    <section id="command" class="content-section comparison-section">
+      <h2>Command tracking over the full grid</h2>
+      <div id="native-comparison-table" class="comparison-table-wrap"></div>
+      <p>All three policies use 20,000 training iterations, the same controller recipe, and the same command grid in Isaac Sim. Each trial lasts 15 seconds; the first 5 seconds are settling context. Command success requires completion, planar velocity RMSE at most 0.30 m/s, and yaw-rate RMSE at most 0.40 rad/s. The table reports median planar RMSE.</p>
+      <p>Each method uses its own reference collection, so these are not identical requested styles. Better command tracking does not establish better style fidelity. Cross-simulator and real-world demonstrations are provided for CODES only.</p>
+      <div class="download-links"><a href="data/comparisons/native.csv" download>Command fidelity CSV</a></div>
+    </section>
+    <section id="matched" class="content-section comparison-section">
+      <h2>Controller comparisons with identical references</h2>
+      <p><a href="controllers.html">Watch the controller comparisons →</a></p>
+      <div id="matched-methods" class="segmented" role="group" aria-label="Matched results"><button type="button" data-panel="pb_u" aria-pressed="true">CODES vs. without coarse labels</button><button type="button" data-panel="pb_vq" aria-pressed="false">CODES vs. VQ-VAE</button></div>
+      <p id="matched-protocol-count"></p><div id="matched-comparison-table" class="comparison-table-wrap"></div><p id="matched-conclusion" class="result-insight"></p><p id="matched-uncertainty"></p>
+      <p>Each pair's 120 × 49 reference windows are bitwise identical, encoded through the respective method. All controllers are the iteration-19,999 checkpoints (20,000 updates). Forward commands are 0, 0.25, 0.5, 0.75, 1.0, and 1.5 m/s, with zero lateral and yaw-rate commands, five reset seeds, and 15-second holds.</p>
+      <p>Physical distance (called motion distance on the controller-comparison page) compares equally weighted posture, foot geometry, kinematic contact structure, and joint-motion features, excluding base linear and angular velocity. Features use source-only scaling. Distance is reported on completed trials; completion is shown alongside it. Recording retrieval asks whether the nearest source descriptor belongs to the requested recording, with failed trials counted as unsuccessful. This is not reference consensus cosine or a perceptual score. Random recording-level retrieval is 4.3% for CODES–without coarse labels and 11.2% for CODES–VQ-VAE.</p>
+      <p>The displayed examples are the first, middle, and last entries of each fixed pair list, at 0.5 m/s and reset seed 0; they are not selected by performance. The videos replay saved Isaac Sim states. After an early termination, the last alive frame is held and the failure is labeled.</p>
+      <p>The two comparisons use different overlapping reference sets, so their CODES rows are not the same population. Scores are recording-balanced means rather than whole-dictionary medians. Only exactly shared retained windows are tested. There is one training seed per policy; confidence intervals describe source-recording variability, not variation across training runs. CODES does not outperform VQ-VAE in every metric, including residual lateral and yaw-rate error.</p>
+      <div class="download-links"><a href="data/comparisons/aggregate_summary.csv" download>Matched results CSV</a><a href="data/comparisons/paired_differences.csv" download>Paired differences and intervals</a><a href="data/comparisons/provenance.json" download>Source record</a></div>
+    </section>
+    <section id="deployment" class="content-section">
+      <h2>Real-world deployment</h2>
+      <p>The yellow cue in the opening video marks each logged style selection: C04 → C00 → C14 → C11. The forward command is constant at 0.5 m/s; the operator provides heading corrections. The cue marks selection, not an instantaneous physical response. The controller and state estimation run onboard.</p>
+      <p>Deployment uses an additional 2,000 simulation-training iterations with the joint-target safeguard, with no policy updates during the run.</p>
+    </section>
+  </main>
+  <footer><p><a href="index.html">Return to the demonstrations</a></p><p>Heedo Woo, Antonio Marino, Eduardo Sebastián, and Amanda Prorok · University of Cambridge</p></footer>
+</body>
+</html>

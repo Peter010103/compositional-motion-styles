@@ -1,0 +1,29 @@
+# Local credentials must never be published.
+PAT_details
+.env
+.env.*
+!.env.example
+
+# Local generated caches and incomplete renders.
+__pycache__/
+*.py[cod]
+*.partial.mp4
+
+# Local development notes, exporters, and superseded media (not used by the site).
+BASELINE_COMPARISONS.md
+comparisons.css
+data/affordance_data.json
+data/affordance_data.min.js
+data/references_data.json
+videos/affordance/
+videos/comparisons/
+videos/real_world/deployment_style_switches.mp4
+
+# Original rollout clips stay local; release assets carry their lossless banks.
+# The two-second controller and velocity-matched references remain on Pages.
+videos/velocity_explorer_720p/c[0-9][0-9]_[0-9][0-9][0-9].mp4
+
+# Build output, local previews, and separately published release media.
+_site/
+.release-assets/
+.preview/

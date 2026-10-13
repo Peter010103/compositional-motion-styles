@@ -1,0 +1,4 @@
+method,K,median_planar_rmse_mps,complete_percent,success_percent
+CODES (ours),16,0.114,98.1,74.2
+No coarse terms,15,0.106,99.3,89.8
+VQ-VAE,17,0.142,99.2,66.8

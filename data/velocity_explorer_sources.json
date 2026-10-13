@@ -1,0 +1,41 @@
+{
+  "protocol": {
+    "training_updates": 20000,
+    "rollout_repeat": 0,
+    "grid_repeats": 3,
+    "shown_evaluation_seed": 100,
+    "yaw_command": 0,
+    "settling_s": 5,
+    "scoring_s": 10,
+    "planar_rmse_limit": 0.3,
+    "yaw_rmse_limit": 0.4,
+    "clip_fps": 30,
+    "width": 1280,
+    "height": 720,
+    "clip_selection": "Repeat 0 for every command and group, irrespective of outcome.",
+    "reference": "Exact two-second controller-library window supplied in the displayed trial.",
+    "rendering": "Saved Isaac Sim states at seconds 5\u201315, nearest 50 Hz state at each 30 fps video frame. MuJoCo is a kinematic renderer, not a new dynamics test. Failed trials hold the last alive state.",
+    "style_metric": "Mean reference-consensus cosine over available scored windows and trials; missing scores are not set to zero. No style pass threshold.",
+    "source_support": "Original saved recorded-velocity support mask; not a policy-training holdout mask."
+  },
+  "sources": {
+    "artifacts/style_velocity_affordance_pb_c10_recent_models_2026-09-08/models/A_pb_threshold_w4_iter19999/report_relaxed_rmse/affordance_trials.csv": "01ccd1f31480a70e482b89caddf571a68a0b97053402fcd94d9ec26ae81ea6bc",
+    "artifacts/style_velocity_affordance_pb_c10_recent_models_2026-09-08/models/A_pb_threshold_w4_iter19999/pb_c10_adherence/rollout_summary.csv": "ff49ba06cd01ffe3122dc46224fc0ee88a3e259b9dc0a046433c6a5f4cd44013",
+    "artifacts/style_velocity_affordance_pb_c10_recent_models_2026-09-08/models/A_pb_threshold_w4_iter19999/report_relaxed_rmse/affordance_cells.csv": "2a760fcc5869918d037838eb63aca21bad367a21def6248d91824f40336cf6f9",
+    "artifacts/style_velocity_affordance_pb_c10_recent_models_2026-09-08/models/A_pb_threshold_w4_iter19999/report_relaxed_rmse/hover_previews/manifest.json": "c142f265a9c9cbb3277846082aecb9a2e5c3f992dda996f16607a898dd5eea32",
+    "artifacts/compositional_policy_pb_c10_vq_comparison_2026-09-09/runtime/unitree_rl_lab/deps/skill_compose/artifacts/pb_c10_controller_library_v2.npz": "7c286d55dac9543f27d5af2e33bbfbe658e34291d7fb415a696e6f5da77073a4",
+    "artifacts/style_velocity_affordance_pb_c10_recent_models_2026-09-08/reference/pb_c10_core_l120_window_velocity_reference.npz": "c4b66cd8f24655c3f2184cdbbf3142c281945b1bbfde15489b73fcbe093287a0"
+  },
+  "scene_sha256": "e24a0e492a4cb6d9f4f301867366466441afbea91c4afc8132ab2cda2dc6eccc",
+  "camera": {
+    "distance_m": 1.45,
+    "azimuth_deg": 135,
+    "elevation_deg": -18
+  },
+  "velocity_matched_unique_windows": 316,
+  "velocity_match_rule": "nearest_window_mean_velocity_in_grid_scaled_plane",
+  "velocity_match_yaw_tolerance_rad_s": 0.125,
+  "fixed_missing_group": 5,
+  "cells": 2160,
+  "old_issue": "The development viewer had no zero-yaw velocity-matched reference for group 5. Its recordings are turning motions (minimum absolute mean yaw rate 2.10 rad/s), so the website explicitly falls back to the actual controller-conditioning reference."
+}

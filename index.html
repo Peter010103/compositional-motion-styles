@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CODES discovers motion styles from recordings and composes them with independent robot task commands.">
+  <title>Weakly Supervised Discovery of Motion Styles for Compositional Robot Control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <script src="data/gallery.min.js"></script>
+  <script src="data/velocity_explorer.min.js"></script>
+  <script src="motion-ui.js" defer></script>
+  <script src="gallery.js" defer></script>
+  <script src="velocity-explorer.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#abstract">Skip to content</a>
+  <header class="publication-header">
+    <h1>Weakly Supervised Discovery of Motion Styles<br class="desktop-break"> for Compositional Robot Control</h1>
+    <p class="authors">Heedo Woo · Antonio Marino · Eduardo Sebastián · Amanda Prorok</p>
+    <p class="affiliation">Department of Computer Science and Technology, University of Cambridge</p>
+    <p class="venue">Project website · Supplementary material</p>
+    <nav class="publication-links" aria-label="Paper and code">
+      <a href="paper.pdf" target="_blank" rel="noopener" type="application/pdf">Paper</a>
+      <button type="button" disabled>Code (released soon)</button>
+    </nav>
+  </header>
+  <main>
+    <section id="project-video" class="teaser content-section" aria-label="Narrated project overview">
+      <video id="overviewPlayer" controls playsinline preload="metadata" poster="images/codes_overview.jpg" src="videos/overview/codes_overview_narrated.mp4">Your browser does not support HTML5 video.</video>
+      <p class="footnote">Narrated overview of CODES.</p>
+    </section>
+    <section id="abstract" class="abstract-section">
+      <div class="reading-column">
+        <h2>Different ways to achieve the same task</h2>
+        <p>A task command does not specify every aspect of a robot's motion. Different postures and coordination patterns can achieve the same objective, yet defining these styles by hand is difficult.</p>
+        <p><strong>CODES (Composition Of Discovered Expressive Styles)</strong> discovers styles from motion recordings and makes them available to a robot controller alongside an independent task command. We study three complementary questions:</p>
+      </div>
+      <div class="question-grid">
+        <a href="#reference-motions"><strong>Coherence</strong><span>Do recordings in the same group share motion characteristics?</span></a>
+        <a href="#velocity-explorer" data-show-metric="command"><strong>Command fidelity</strong><span>Does the robot follow the requested velocity?</span></a>
+        <a href="#velocity-explorer" data-show-metric="style"><strong>Style fidelity</strong><span>Does the execution retain the requested motion characteristics?</span></a>
+      </div>
+    </section>
+    <section id="overview" class="content-section">
+      <h2>From recordings to robot control</h2>
+      <figure>
+        <img src="images/pipeline.png" alt="CODES pipeline: retarget motion recordings, discover motion groups, and combine a selected style with an independent command." loading="lazy">
+      </figure>
+      <div class="method-steps">
+        <p><strong>1. Retarget</strong>Recordings from different sources provide executable motions on the robot.</p>
+        <p><strong>2. Discover</strong>Weakly supervised consensus learning groups related motions into candidate styles.</p>
+        <p><strong>3. Compose</strong>A reinforcement-learning policy combines a selected style reference with a task command.</p>
+      </div>
+      <p class="section-link"><a href="technical.html#method">Method and data details →</a></p>
+    </section>
+    <section id="reference-motions" class="content-section">
+      <p class="section-kicker">Coherence</p>
+      <h2>Browse the motion styles</h2>
+      <p class="section-intro">Select a group to see recorded examples assigned to it. Compare their posture and limb coordination, then browse other groups to see what changes.</p>
+      <p id="gallery-method-note" class="control-explanation"></p>
+      <div id="gallery-styles" aria-label="Recorded motion groups"></div>
+      <div class="gallery-toolbar"><h3 id="gallery-selected"></h3><button id="gallery-try" class="text-button" type="button">Try this style with velocity commands →</button></div>
+      <div id="referenceDisplayRoot"></div>
+      <p class="mobile-hint">Swipe the recorded examples to compare them.</p>
+      <div class="comparison-buttons"><button id="gallery-play" type="button">Play examples</button><button id="gallery-pause" type="button" class="secondary-button">Pause</button></div>
+      <p id="gallery-playback-status" class="playback-status" aria-live="polite"></p>
+      <p class="small-note">These are recorded motions; controller executions appear below.</p>
+      <p class="small-note"><a href="technical.html#coherence">Quantitative coherence results →</a></p>
+    </section>
+    <section id="velocity-explorer" class="content-section">
+      <p class="section-kicker">Command fidelity · Style fidelity</p>
+      <h2>Vary the command, keep the style</h2>
+      <p class="section-intro">Choose a style, then hover over a velocity cell or tap to select it. The controller uses the same reference throughout each style's grid.</p>
+      <div id="velocity-styles" aria-label="Controller styles"></div>
+      <h3 id="velocity-selected" class="velocity-selected"></h3>
+      <div class="velocity-workspace">
+        <div class="velocity-grid-panel">
+          <div id="velocity-metrics" class="segmented" role="group" aria-label="Grid colors">
+            <button type="button" data-metric="command" aria-pressed="true">Command fidelity</button>
+            <button type="button" data-metric="style" aria-pressed="false">Style fidelity</button>
+          </div>
+          <p id="velocity-metric-explanation" class="control-explanation"></p>
+          <p class="velocity-axis-note">Forward velocity vₓ (m/s) → · Lateral velocity vᵧ (m/s) ↑</p>
+          <div class="velocity-grid-scroll"><div id="velocity-grid" aria-label="Velocity commands for the selected style"></div></div>
+          <div id="velocity-legend" class="velocity-legend"></div>
+          <p id="velocity-cell-metrics" class="selected-metrics" aria-live="polite"></p>
+          <div class="comparison-buttons"><button id="velocity-pin" type="button" aria-pressed="false">Keep this cell</button><button id="velocity-play" type="button">Play both</button><button id="velocity-pause" type="button" class="secondary-button">Pause</button></div>
+          <p id="velocity-status" class="playback-status" aria-live="polite"></p>
+        </div>
+        <div class="velocity-media-panel">
+          <div class="media-comparison-grid velocity-videos">
+            <div><h4 id="velocity-reference-heading">Controller reference</h4><video id="velocity-reference" controls muted loop playsinline preload="metadata"></video><p id="velocity-reference-note" class="source-caption"></p></div>
+            <div><h4>CODES execution</h4><video id="velocity-rollout" controls muted loop playsinline preload="metadata"></video><p id="velocity-trial-status" class="source-caption"></p><p id="velocity-trial-metrics" class="source-caption"></p></div>
+          </div>
+          <label class="optional-comparison"><input id="velocity-matched-toggle" type="checkbox"> Show a velocity-matched recording for comparison</label>
+          <p id="velocity-reference-explanation" class="small-note" hidden></p>
+        </div>
+      </div>
+      <p class="small-note explorer-footnote">Yaw-rate command is zero. Colors summarize three trials; the video always shows trial 1. The two-second reference loops alongside the simulation execution without phase alignment. <a href="technical.html#velocity">Metrics and evaluation protocol</a></p>
+      <p class="section-link"><a href="controllers.html">Compare with baseline controllers →</a></p>
+    </section>
+    <section id="real-world" class="content-section deployment-section" aria-labelledby="deployment-heading">
+      <h2 id="deployment-heading">Real-world deployment</h2>
+      <video id="hardwarePlayer" controls muted playsinline preload="metadata" poster="images/deployment_style_switches.jpg" src="videos/real_world/deployment_style_switches_720p.mp4">Your browser does not support HTML5 video.</video>
+      <p class="teaser-caption"><strong>One forward command, different motion styles.</strong> The Go2 follows a 0.5 m/s forward command while the selected style changes.</p>
+      <p class="footnote">Yellow highlights mark style selections. Playback is at real speed; the operator provides heading corrections. <a href="technical.html#deployment">Deployment details</a></p>
+    </section>
+    <noscript><p class="reading-column">Enable JavaScript to browse styles and compare controllers. The overview and deployment videos and <a href="technical.html">technical descriptions</a> remain available.</p></noscript>
+  </main>
+  <footer><p><a href="controllers.html">Controller comparisons</a> · <a href="technical.html">Quantitative results and technical details</a></p><p>Heedo Woo, Antonio Marino, Eduardo Sebastián, and Amanda Prorok · University of Cambridge</p><p>Supported by a Leverhulme Trust Research Project Grant.</p><p>Website layout inspired by <a href="https://nerfies.github.io/">Nerfies</a>.</p></footer>
+</body>
+</html>

@@ -1,0 +1,6 @@
+method,coverage_percent,silhouette,cross_recording_auc
+CODES (ours),72.8,0.329,0.832
+No coarse terms,90.8,0.264,0.826
+VQ-VAE,100.0,-0.043,0.562
+"CODES, full coverage",100.0,0.246,0.79
+"VQ-VAE, recording-balanced",100.0,0.022,0.68

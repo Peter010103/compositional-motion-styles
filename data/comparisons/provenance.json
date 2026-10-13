@@ -1,0 +1,250 @@
+{
+  "sources": {
+    "artifacts/results_gap_experiments_2026-09-13/matched_evaluation/aggregate_summary.csv": "7cb028c7db51a9fb862e54085212500918d7409dee5eb001a3e231149271edf1",
+    "artifacts/results_gap_experiments_2026-09-13/matched_evaluation/paired_differences.csv": "3c431d0c999bb4593d5a9e258efc5fe5a3d52f0108bb053807b007786c8361bf",
+    "artifacts/results_gap_experiments_2026-09-13/matched_evaluation/reference_contract.json": "f9622c77c9603ba5c76571d91f89fe79ce0eddbd2576a8100172ac35e6c7505e",
+    "paper/quadruped_behavior_composition/tables/04_vq_coherence_table.tex": "8649d546d3ff020be16a24f5d9f07813f3913a8552d78ae7bb97e9f0939e3454",
+    "paper/quadruped_behavior_composition/tables/04_controller_table.tex": "cde1d74d2b63e4c765d971bc69b6120a09eeee6d77085644855b473f6bee05f3",
+    "paper/quadruped_behavior_composition/tables/04_decomposition_table.tex": "4e1e69242840cb12a710c1d3636bdddc40a9c70eb4d1030e0b078804b19387fa"
+  },
+  "examples": [
+    {
+      "panel": "pb_u",
+      "pair_id": 0,
+      "recording_id": 5,
+      "anchor": 129,
+      "source": "kine2go::ai4_dog_run_02_traj_0000",
+      "command": [
+        0.5,
+        0,
+        0
+      ],
+      "seed": 0,
+      "reference_video": "videos/comparisons_720p/pb_u_0_reference.mp4",
+      "policies": [
+        {
+          "method": "pb",
+          "name": "CODES (ours)",
+          "reference_id": 74,
+          "style_id": 1,
+          "video": "videos/comparisons_720p/pb_u_0_pb.mp4",
+          "completed": true,
+          "planar_rmse": 0.11993553513804367,
+          "physical_distance": 1.7842453069702744
+        },
+        {
+          "method": "u",
+          "name": "No coarse terms",
+          "reference_id": 8,
+          "style_id": 0,
+          "video": "videos/comparisons_720p/pb_u_0_u.mp4",
+          "completed": true,
+          "planar_rmse": 0.10600147711378477,
+          "physical_distance": 1.852633676257315
+        }
+      ]
+    },
+    {
+      "panel": "pb_u",
+      "pair_id": 19,
+      "recording_id": 35,
+      "anchor": 979,
+      "source": "kine2go::vhdc_horse1_s2_trot_02_traj_0000",
+      "command": [
+        0.5,
+        0,
+        0
+      ],
+      "seed": 0,
+      "reference_video": "videos/comparisons_720p/pb_u_19_reference.mp4",
+      "policies": [
+        {
+          "method": "pb",
+          "name": "CODES (ours)",
+          "reference_id": 34,
+          "style_id": 0,
+          "video": "videos/comparisons_720p/pb_u_19_pb.mp4",
+          "completed": true,
+          "planar_rmse": 0.07052242495801035,
+          "physical_distance": 0.4826445115401682
+        },
+        {
+          "method": "u",
+          "name": "No coarse terms",
+          "reference_id": 44,
+          "style_id": 1,
+          "video": "videos/comparisons_720p/pb_u_19_u.mp4",
+          "completed": true,
+          "planar_rmse": 0.061041794874663,
+          "physical_distance": 0.5219952335870287
+        }
+      ]
+    },
+    {
+      "panel": "pb_u",
+      "pair_id": 38,
+      "recording_id": 52,
+      "anchor": 119,
+      "source": "realworld::stretch_canonical",
+      "command": [
+        0.5,
+        0,
+        0
+      ],
+      "seed": 0,
+      "reference_video": "videos/comparisons_720p/pb_u_38_reference.mp4",
+      "policies": [
+        {
+          "method": "pb",
+          "name": "CODES (ours)",
+          "reference_id": 275,
+          "style_id": 11,
+          "video": "videos/comparisons_720p/pb_u_38_pb.mp4",
+          "completed": true,
+          "planar_rmse": 0.043995734439855605,
+          "physical_distance": 0.9311034262098085
+        },
+        {
+          "method": "u",
+          "name": "No coarse terms",
+          "reference_id": 108,
+          "style_id": 3,
+          "video": "videos/comparisons_720p/pb_u_38_u.mp4",
+          "completed": true,
+          "planar_rmse": 0.05894483669642402,
+          "physical_distance": 0.7790193495192375
+        }
+      ]
+    },
+    {
+      "panel": "pb_vq",
+      "pair_id": 0,
+      "recording_id": 0,
+      "anchor": 559,
+      "source": "kine2go::ai4_dog_canter_traj_0000",
+      "command": [
+        0.5,
+        0,
+        0
+      ],
+      "seed": 0,
+      "reference_video": "videos/comparisons_720p/pb_vq_0_reference.mp4",
+      "policies": [
+        {
+          "method": "pb",
+          "name": "CODES (ours)",
+          "reference_id": 69,
+          "style_id": 1,
+          "video": "videos/comparisons_720p/pb_vq_0_pb.mp4",
+          "completed": false,
+          "planar_rmse": NaN,
+          "physical_distance": NaN
+        },
+        {
+          "method": "vq",
+          "name": "VQ-VAE",
+          "reference_id": 3,
+          "style_id": 13,
+          "video": "videos/comparisons_720p/pb_vq_0_vq.mp4",
+          "completed": true,
+          "planar_rmse": 0.05384995864593032,
+          "physical_distance": 1.236832521660624
+        }
+      ]
+    },
+    {
+      "panel": "pb_vq",
+      "pair_id": 7,
+      "recording_id": 41,
+      "anchor": 294,
+      "source": "realworld::figure_8_jump_canonical",
+      "command": [
+        0.5,
+        0,
+        0
+      ],
+      "seed": 0,
+      "reference_video": "videos/comparisons_720p/pb_vq_7_reference.mp4",
+      "policies": [
+        {
+          "method": "pb",
+          "name": "CODES (ours)",
+          "reference_id": 289,
+          "style_id": 13,
+          "video": "videos/comparisons_720p/pb_vq_7_pb.mp4",
+          "completed": true,
+          "planar_rmse": 0.05961431927405897,
+          "physical_distance": 0.7780260543769961
+        },
+        {
+          "method": "vq",
+          "name": "VQ-VAE",
+          "reference_id": 152,
+          "style_id": 47,
+          "video": "videos/comparisons_720p/pb_vq_7_vq.mp4",
+          "completed": true,
+          "planar_rmse": 0.09312733414136035,
+          "physical_distance": 0.501201170752477
+        }
+      ]
+    },
+    {
+      "panel": "pb_vq",
+      "pair_id": 13,
+      "recording_id": 51,
+      "anchor": 2644,
+      "source": "realworld::sit_down_up_canonical",
+      "command": [
+        0.5,
+        0,
+        0
+      ],
+      "seed": 0,
+      "reference_video": "videos/comparisons_720p/pb_vq_13_reference.mp4",
+      "policies": [
+        {
+          "method": "pb",
+          "name": "CODES (ours)",
+          "reference_id": 264,
+          "style_id": 11,
+          "video": "videos/comparisons_720p/pb_vq_13_pb.mp4",
+          "completed": true,
+          "planar_rmse": 0.26137035915289447,
+          "physical_distance": 1.253422556641894
+        },
+        {
+          "method": "vq",
+          "name": "VQ-VAE",
+          "reference_id": 132,
+          "style_id": 18,
+          "video": "videos/comparisons_720p/pb_vq_13_vq.mp4",
+          "completed": true,
+          "planar_rmse": 0.052483735498248175,
+          "physical_distance": 1.4190209528843745
+        }
+      ]
+    }
+  ],
+  "protocol": {
+    "training_updates": 20000,
+    "training_seeds": 1,
+    "matched_reference_counts": {
+      "pb_u": 39,
+      "pb_vq": 14
+    },
+    "reset_seeds": 5,
+    "hold_seconds": 15,
+    "settling_seconds": 5,
+    "vx_commands": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1,
+      1.5
+    ],
+    "example_selection": "First, middle, and last pair in each frozen source-window list; vx=0.5, reset seed=0; no outcome-based filtering.",
+    "reference_display": "Exact two-second requested window, reconstructed kinematics; no phase alignment to controller execution.",
+    "rollout_display": "Saved Isaac Sim states at 5\u201315 s, native 1280x720 at 30 fps; nearest 50 Hz state sampled at each output time. Kinematic rendering, not a new MuJoCo execution. After termination, the last alive frame is held."
+  }
+}

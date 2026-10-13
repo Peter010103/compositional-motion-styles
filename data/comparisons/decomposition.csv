@@ -1,0 +1,8 @@
+method,K,effective_K,locomotion_K,coverage_percent,core_switches_per_min
+CODES (ours),16,10.19,12,72.8,1.36
+No coarse terms,15,8.92,10,90.8,0.79
+Separation only,15,7.4,9,91.3,1.01
+Uniform attraction,7,3.42,7,95.9,0.0
+No reconstruction,3,1.2,3,93.6,0.0
+Kinematic PCA,39,30.0,30,84.1,3.02
+TS2Vec consensus,41,24.39,31,96.7,0.14
