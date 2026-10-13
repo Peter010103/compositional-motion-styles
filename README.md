@@ -2,7 +2,9 @@
 
 Project website for **Weakly Supervised Discovery of Motion Styles for Compositional Robot Control**, by Heedo Woo, Antonio Marino, Eduardo Sebastián, and Amanda Prorok, University of Cambridge.
 
-Public website: `https://peter010103.github.io/compositional-motion-styles/`.
+Public website: `https://www.proroklab.org/compositional-motion-styles/`.
+
+GitHub Pages origin: `https://peter010103.github.io/compositional-motion-styles/`.
 
 ## Preview locally
 
@@ -29,7 +31,7 @@ The Pages workflow publishes only the public files selected by `scripts/build_si
 
 ## Lab-domain integration
 
-The final `www.proroklab.org/...` path is awaiting selection. Once selected, the lab website can proxy that path to this site's GitHub Pages address, following its existing workshop integration. Update the paper's website link and the overview video's displayed URL to the lab address at that point. The existing submitted website is maintained independently.
+The lab website serves `/compositional-motion-styles/` through a Cloudflare Pages proxy to this site's GitHub Pages address, following its existing workshop integration. The paper links to the lab-domain URL. Project content is maintained here; the lab repository supplies the route. The existing submitted website remains independent.
 
 ## Checks
 
